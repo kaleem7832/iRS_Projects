@@ -1,9 +1,8 @@
-import UserInfo from "@/components/UserInfo";
-import Header from "@/components/header";
+import Projects from "@/components/Projects";
 
 export default function Dashboard() {
-  
+   
   return (<>
-  <Header/>
-  <UserInfo /></>);
+    <Projects/>
+  </>);
 }

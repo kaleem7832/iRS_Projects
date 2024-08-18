@@ -3,15 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-export default function AddNew() {
-  function formated(isoString) {
-    const date = new Date(isoString);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-based
-    const day = String(date.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
-  }
-
+export default function UpdateProject({ projectID }) {
   const [received, setReceived] = useState("");
   const [client, setClient] = useState("");
   const [clients, setClients] = useState([]);
@@ -30,10 +22,18 @@ export default function AddNew() {
 
   const router = useRouter();
 
+  function formated(isoString) {
+    const date = new Date(isoString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
   useEffect(() => {
     const fetchClients = async () => {
       try {
-        const response = await fetch("../api/client");
+        const response = await fetch("../../api/client");
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -48,6 +48,43 @@ export default function AddNew() {
     fetchClients();
   }, []);
 
+  useEffect(() => {
+    const fetchProject = async () => {
+      try {
+        const response = await fetch("../../api/project", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ confirmit: projectID }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+
+        setReceived(formated(data.received));
+        setTitle(data.title);
+        setConfirmit(data.confirmit);
+        setClient(data.client);
+        setProgrammer1(data.programmer1);
+        setProgrammer2(data.programmer2);
+        setLaunch(formated(data.launch));
+        setDelivery(formated(data.delivery));
+        setScriptqc(data.scriptqc);
+        setTester(data.tester);
+        setSize(data.size);
+        setManger(data.manager);
+        setStatus(data.status);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchProject();
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -57,22 +94,7 @@ export default function AddNew() {
     }
 
     try {
-      const resUserExists = await fetch("../api/projectExist", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ confirmit }),
-      });
-
-      const { user } = await resUserExists.json();
-
-      if (user) {
-        setError("Project already exists.");
-        return;
-      }
-
-      const res = await fetch("../api/addProject", {
+      const res = await fetch("../../api/updateProject", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -95,15 +117,13 @@ export default function AddNew() {
       });
 
       if (res.ok) {
-        const form = e.target;
-        form.reset();
         setError("");
         router.push("/");
       } else {
-        console.log("Adding project failed.");
+        console.log("updating project failed.");
       }
     } catch (error) {
-      console.log("Error during adding: ", error);
+      console.log("Error during updating: ", error);
     }
   };
 
@@ -117,11 +137,15 @@ export default function AddNew() {
               <input
                 onChange={(e) => setReceived(formated(e.target.value))}
                 type="date"
+                value={received}
               />
             </div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Client</label>
-              <select onChange={(e) => setClient(e.target.value)}>
+              <select
+                onChange={(e) => setClient(e.target.value)}
+                value={client}
+              >
                 <option>Please select client</option>
                 {clients.map((c) => {
                   return <option value={c.name}>{c.name}</option>;
@@ -130,7 +154,11 @@ export default function AddNew() {
             </div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Project title</label>
-              <input onChange={(e) => setTitle(e.target.value)} type="text" />
+              <input
+                onChange={(e) => setTitle(e.target.value)}
+                type="text"
+                value={title}
+              />
             </div>
 
             <div className="flex flex-col gap-1 mb-2">
@@ -138,12 +166,17 @@ export default function AddNew() {
               <input
                 onChange={(e) => setConfirmit(e.target.value)}
                 type="text"
+                value={confirmit}
+                disabled
               />
             </div>
 
             <div className="flex flex-col gap-1 mb-2">
               <label>Primary programmer</label>
-              <select onChange={(e) => setProgrammer1(e.target.value)}>
+              <select
+                onChange={(e) => setProgrammer1(e.target.value)}
+                value={programmer1}
+              >
                 <option>Please select one</option>
                 <option value="Kaleem">Kaleem</option>
                 <option value="Karishma">Karishma</option>
@@ -155,6 +188,7 @@ export default function AddNew() {
               <input
                 onChange={(e) => setProgrammer2(e.target.value)}
                 type="text"
+                value={programmer2}
               />
             </div>
             <div className="flex flex-col gap-1 mb-2">
@@ -162,19 +196,25 @@ export default function AddNew() {
               <input
                 onChange={(e) => setDelivery(formated(e.target.value))}
                 type="date"
+                value={delivery}
               />
             </div>
           </div>
           <div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Tested by</label>
-              <input onChange={(e) => setTester(e.target.value)} type="text" />
+              <input
+                onChange={(e) => setTester(e.target.value)}
+                type="text"
+                value={tester}
+              />
             </div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Script QC</label>
               <input
                 onChange={(e) => setScriptqc(e.target.value)}
                 type="text"
+                value={scriptqc}
               />
             </div>
             <div className="flex flex-col gap-1 mb-2">
@@ -182,23 +222,31 @@ export default function AddNew() {
               <input
                 onChange={(e) => setLaunch(formated(e.target.value))}
                 type="date"
+                value={launch}
               />
             </div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Manager</label>
-              <input onChange={(e) => setManger(e.target.value)} type="text" />
+              <input
+                onChange={(e) => setManger(e.target.value)}
+                type="text"
+                value={manager}
+              />
             </div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Sample size</label>
               <input
                 onChange={(e) => setSize(e.target.value)}
-                type="number"
-                min={0}
+                type="numeric"
+                value={size}
               />
             </div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Status</label>
-              <select onChange={(e) => setStatus(e.target.value)}>
+              <select
+                onChange={(e) => setStatus(e.target.value)}
+                value={status}
+              >
                 <option>Please select one</option>
                 <option value="Programming">Programming</option>
                 <option value="Changes">Changes</option>
@@ -211,7 +259,7 @@ export default function AddNew() {
                 type="submit"
                 className="p-2 rounded-sm bg-slate-800 text-white w-full"
               >
-                Add Project
+                Update Project
               </button>
             </div>
           </div>

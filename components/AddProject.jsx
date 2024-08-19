@@ -124,7 +124,11 @@ export default function AddNew() {
               <select onChange={(e) => setClient(e.target.value)}>
                 <option>Please select client</option>
                 {clients.map((c) => {
-                  return <option value={c.name}>{c.name}</option>;
+                  return (
+                    <option key={c.name} value={c.name}>
+                      {c.name}
+                    </option>
+                  );
                 })}
               </select>
             </div>

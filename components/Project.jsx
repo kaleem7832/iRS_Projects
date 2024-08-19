@@ -13,7 +13,7 @@ const Project = ({ project }) => {
       href={"/dashboard/project/" + project.confirmit}
       className="rounded-md border border-slate-600 p-4"
     >
-      <div className="text-md">
+      <div className="text-md overflow-hidden whitespace-nowrap text-ellipsis">
         {project.title}
         <p className="border-t border-t-slate-600 text-xs text-slate-400">
           Project name

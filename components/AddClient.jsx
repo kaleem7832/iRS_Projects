@@ -66,7 +66,7 @@ export default function AddClient() {
               <label>&nbsp;</label>
               <button
                 type="submit"
-                className="p-2 rounded-sm bg-slate-800 text-white w-full"
+                className="p-2 rounded-sm bg-slate-800 text-white w-full border border-slate-600"
               >
                 Add Client
               </button>

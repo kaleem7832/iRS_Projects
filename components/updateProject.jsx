@@ -148,7 +148,11 @@ export default function UpdateProject({ projectID }) {
               >
                 <option>Please select client</option>
                 {clients.map((c) => {
-                  return <option value={c.name}>{c.name}</option>;
+                  return (
+                    <option key={c.name} value={c.name}>
+                      {c.name}
+                    </option>
+                  );
                 })}
               </select>
             </div>

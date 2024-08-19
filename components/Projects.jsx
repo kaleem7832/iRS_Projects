@@ -26,7 +26,7 @@ export default function Projects() {
     <>
       {projects.map((project) => {
         {
-          return <Project project={project} />;
+          return <Project key={project.confirmit} project={project} />;
         }
       })}
     </>

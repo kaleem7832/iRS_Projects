@@ -8,7 +8,7 @@ export default function Projects() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch("api/projects");
+        const response = await fetch("api/projects", { cache: "no-store" });
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }

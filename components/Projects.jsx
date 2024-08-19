@@ -23,12 +23,14 @@ export default function Projects() {
   }, []);
 
   return (
-    <>
-      {projects.map((project) => {
-        {
-          return <Project key={project.confirmit} project={project} />;
-        }
-      })}
-    </>
+    <div className=" container mx-auto mt-5">
+      <div className="grid gap-3 grid-cols-3">
+        {projects.map((project) => {
+          {
+            return <Project key={project.confirmit} project={project} />;
+          }
+        })}
+      </div>
+    </div>
   );
 }

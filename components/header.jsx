@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 
 export default function Header() {
   return (
-    <div className="bg-slate-800 p-3">
+    <div className="bg-slate-950 p-3">
       <div className="container mx-auto  flex justify-between items-center content-center">
         <Link href={"/dashboard"}>
           <img

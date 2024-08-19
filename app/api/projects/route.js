@@ -7,7 +7,7 @@ export async function GET(req) {
     await connectMongoDB();
 
     const projects = await Project.find().select(
-      "client title confirmit programmer1 received delivery manager"
+      "client title confirmit programmer1 received delivery manager status"
     );
 
     return NextResponse.json(projects);

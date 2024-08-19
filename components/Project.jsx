@@ -19,7 +19,7 @@ const Project = ({ project }) => {
           Project name
         </p>
       </div>
-      <div className="mt-3 flex justify-between">
+      <div className="mt-3 flex flex-1 justify-between">
         <div>
           Online
           <p className="border-t border-t-slate-600 text-xs text-slate-400">
@@ -39,7 +39,7 @@ const Project = ({ project }) => {
           </p>
         </div>
       </div>
-      <div className="mt-3 flex flex-grow justify-between">
+      <div className="mt-3 flex flex-1 justify-between">
         <div>
           {project.programmer1}
           <p className="border-t border-t-slate-600 text-xs text-slate-400">
@@ -47,15 +47,15 @@ const Project = ({ project }) => {
           </p>
         </div>
         <div className="text-sm text-center">
-          {formated(project.delivery)}
-          <p class="border-t border-t-slate-600 text-xs text-slate-400">
-            Delivery
-          </p>
-        </div>
-        <div className="text-sm text-right">
           {project.status}
           <p class="border-t border-t-slate-600 text-xs text-slate-400">
             Status
+          </p>
+        </div>
+        <div className="text-sm text-right">
+          {formated(project.delivery)}
+          <p class="border-t border-t-slate-600 text-xs text-slate-400">
+            Delivery
           </p>
         </div>
       </div>

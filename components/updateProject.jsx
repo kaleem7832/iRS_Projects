@@ -322,6 +322,7 @@ export default function UpdateProject({ projectID }) {
               >
                 <option>Please select one</option>
                 <option value="Programming">Programming</option>
+                <option value="Delivered">Delivered</option>
                 <option value="Changes">Changes</option>
                 <option value="Live">Live</option>
               </select>

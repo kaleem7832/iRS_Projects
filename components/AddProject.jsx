@@ -242,7 +242,7 @@ export default function AddNew() {
               <select onChange={(e) => setStatus(e.target.value)}>
                 <option>Please select one</option>
                 <option value="Programming">Programming</option>
-                <option value="Link delivered">Link delivered</option>
+                <option value="Delivered">Delivered</option>
                 <option value="Changes">Changes</option>
                 <option value="Live">Live</option>
               </select>

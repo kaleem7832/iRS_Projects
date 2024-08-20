@@ -2,6 +2,8 @@ import { connectMongoDB } from "@/lib/mongodb";
 import Project from "@/models/project";
 import { NextResponse } from "next/server";
 
+export const revalidate = 0;
+
 export async function POST(req) {
   try {
     const {

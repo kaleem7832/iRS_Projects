@@ -310,7 +310,7 @@ export default function UpdateProject({ projectID }) {
             <button
               onClick={handleDelete}
               type="button"
-              className="w-[400px] p-2 rounded-sm bg-slate-800 text-red-600 w-full border border-red-600"
+              className="w-[400px] p-2 rounded-sm bg-slate-800 text-red-600  border border-red-600"
             >
               Delete Project
             </button>

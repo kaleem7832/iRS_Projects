@@ -161,15 +161,26 @@ export default function AddNew() {
                 <option>Please select one</option>
                 <option value="Kaleem">Kaleem</option>
                 <option value="Karishma">Karishma</option>
+                <option value="Ketan">Ketan</option>
+                <option value="Amit">Amit</option>
+                <option value="Janhavi">Janhavi</option>
+                <option value="Bhakti">Bhakti</option>
+                <option value="Priti">Priti</option>
               </select>
             </div>
 
             <div className="flex flex-col gap-1 mb-2">
               <label>Secondary programmer</label>
-              <input
-                onChange={(e) => setProgrammer2(e.target.value)}
-                type="text"
-              />
+              <select onChange={(e) => setProgrammer2(e.target.value)}>
+                <option>Please select one</option>
+                <option value="Kaleem">Kaleem</option>
+                <option value="Karishma">Karishma</option>
+                <option value="Ketan">Ketan</option>
+                <option value="Amit">Amit</option>
+                <option value="Janhavi">Janhavi</option>
+                <option value="Bhakti">Bhakti</option>
+                <option value="Priti">Priti</option>
+              </select>
             </div>
           </div>
 
@@ -183,14 +194,29 @@ export default function AddNew() {
             </div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Tested by</label>
-              <input onChange={(e) => setTester(e.target.value)} type="text" />
+              <select onChange={(e) => setTester(e.target.value)}>
+                <option>Please select one</option>
+                <option value="Kaleem">Kaleem</option>
+                <option value="Karishma">Karishma</option>
+                <option value="Ketan">Ketan</option>
+                <option value="Amit">Amit</option>
+                <option value="Janhavi">Janhavi</option>
+                <option value="Bhakti">Bhakti</option>
+                <option value="Priti">Priti</option>
+              </select>
             </div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Script QC</label>
-              <input
-                onChange={(e) => setScriptqc(e.target.value)}
-                type="text"
-              />
+              <select onChange={(e) => setScriptqc(e.target.value)}>
+                <option>Please select one</option>
+                <option value="Kaleem">Kaleem</option>
+                <option value="Karishma">Karishma</option>
+                <option value="Ketan">Ketan</option>
+                <option value="Amit">Amit</option>
+                <option value="Janhavi">Janhavi</option>
+                <option value="Bhakti">Bhakti</option>
+                <option value="Priti">Priti</option>
+              </select>
             </div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Launch date</label>
@@ -216,6 +242,7 @@ export default function AddNew() {
               <select onChange={(e) => setStatus(e.target.value)}>
                 <option>Please select one</option>
                 <option value="Programming">Programming</option>
+                <option value="Link delivered">Link delivered</option>
                 <option value="Changes">Changes</option>
                 <option value="Live">Live</option>
               </select>

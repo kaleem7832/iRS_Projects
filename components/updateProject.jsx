@@ -234,11 +234,19 @@ export default function UpdateProject({ projectID }) {
 
             <div className="flex flex-col gap-1 mb-2">
               <label>Secondary programmer</label>
-              <input
+              <select
                 onChange={(e) => setProgrammer2(e.target.value)}
-                type="text"
                 value={programmer2}
-              />
+              >
+                <option>Please select one</option>
+                <option value="Kaleem">Kaleem</option>
+                <option value="Karishma">Karishma</option>
+                <option value="Ketan">Ketan</option>
+                <option value="Amit">Amit</option>
+                <option value="Janhavi">Janhavi</option>
+                <option value="Bhakti">Bhakti</option>
+                <option value="Priti">Priti</option>
+              </select>
             </div>
           </div>
           <div>
@@ -252,19 +260,35 @@ export default function UpdateProject({ projectID }) {
             </div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Tested by</label>
-              <input
+              <select
                 onChange={(e) => setTester(e.target.value)}
-                type="text"
                 value={tester}
-              />
+              >
+                <option>Please select one</option>
+                <option value="Kaleem">Kaleem</option>
+                <option value="Karishma">Karishma</option>
+                <option value="Ketan">Ketan</option>
+                <option value="Amit">Amit</option>
+                <option value="Janhavi">Janhavi</option>
+                <option value="Bhakti">Bhakti</option>
+                <option value="Priti">Priti</option>
+              </select>
             </div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Script QC</label>
-              <input
+              <select
                 onChange={(e) => setScriptqc(e.target.value)}
-                type="text"
                 value={scriptqc}
-              />
+              >
+                <option>Please select one</option>
+                <option value="Kaleem">Kaleem</option>
+                <option value="Karishma">Karishma</option>
+                <option value="Ketan">Ketan</option>
+                <option value="Amit">Amit</option>
+                <option value="Janhavi">Janhavi</option>
+                <option value="Bhakti">Bhakti</option>
+                <option value="Priti">Priti</option>
+              </select>
             </div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Launch date</label>

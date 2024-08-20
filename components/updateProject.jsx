@@ -18,6 +18,7 @@ export default function UpdateProject({ projectID }) {
   const [launch, setLaunch] = useState("");
   const [size, setSize] = useState(0);
   const [delivery, setDelivery] = useState("");
+  const [methodology, setMethodology] = useState("");
   const [error, setError] = useState("");
 
   const router = useRouter();
@@ -76,6 +77,7 @@ export default function UpdateProject({ projectID }) {
         setTester(data.tester);
         setSize(data.size);
         setManger(data.manager);
+        setMethodology(data.methodology);
         setStatus(data.status);
       } catch (error) {
         console.log(error);
@@ -85,10 +87,41 @@ export default function UpdateProject({ projectID }) {
     fetchProject();
   }, []);
 
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    if (!confirmit) {
+      console.log("all fields are required");
+      return;
+    }
+
+    try {
+      if (confirm("Do you want to delete: " + title)) {
+        const res = await fetch("../../api/deleteProject", {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            confirmit,
+          }),
+        });
+
+        if (res.ok) {
+          setError("");
+          router.push("/dashboard");
+        } else {
+          console.log("Deleting project failed.");
+        }
+      }
+    } catch (error) {
+      console.log("Error during deleting: ", error);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!received || !client || !title) {
+    if (!received || !client || !title || !confirmit) {
       console.log("all fields are required");
       return;
     }
@@ -112,13 +145,14 @@ export default function UpdateProject({ projectID }) {
           delivery,
           size,
           confirmit,
+          methodology,
           status,
         }),
       });
 
       if (res.ok) {
         setError("");
-        router.push("/");
+        router.push("dashboard");
       } else {
         console.log("updating project failed.");
       }
@@ -164,7 +198,18 @@ export default function UpdateProject({ projectID }) {
                 value={title}
               />
             </div>
-
+            <div className="flex flex-col gap-1 mb-2">
+              <label>Methodolofy</label>
+              <select
+                onChange={(e) => setMethodology(e.target.value)}
+                value={methodology}
+              >
+                <option>Please select one</option>
+                <option value="Online">Online</option>
+                <option value="CATI">CATI</option>
+                <option value="Online & CATI">Online & CATI</option>
+              </select>
+            </div>
             <div className="flex flex-col gap-1 mb-2">
               <label>ConfirmIT ID</label>
               <input
@@ -195,6 +240,8 @@ export default function UpdateProject({ projectID }) {
                 value={programmer2}
               />
             </div>
+          </div>
+          <div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Delivery date</label>
               <input
@@ -203,8 +250,6 @@ export default function UpdateProject({ projectID }) {
                 value={delivery}
               />
             </div>
-          </div>
-          <div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Tested by</label>
               <input
@@ -257,15 +302,27 @@ export default function UpdateProject({ projectID }) {
                 <option value="Live">Live</option>
               </select>
             </div>
-            <div className="flex flex-col gap-1 mb-2">
-              <label>&nbsp;</label>
-              <button
-                type="submit"
-                className="p-2 rounded-sm bg-slate-800 text-white w-full border border-slate-600"
-              >
-                Update Project
-              </button>
-            </div>
+          </div>
+        </div>
+        <div className="flex justify-center gap-3">
+          <div className="flex flex-col gap-1 mb-2">
+            <label>&nbsp;</label>
+            <button
+              onClick={handleDelete}
+              type="button"
+              className="w-[400px] p-2 rounded-sm bg-slate-800 text-red-600 w-full border border-red-600"
+            >
+              Delete Project
+            </button>
+          </div>
+          <div className="flex flex-col gap-1 mb-2">
+            <label>&nbsp;</label>
+            <button
+              type="submit"
+              className="p-2 rounded-sm bg-slate-800 text-white w-full border border-slate-600"
+            >
+              Update Project
+            </button>
           </div>
         </div>
       </form>

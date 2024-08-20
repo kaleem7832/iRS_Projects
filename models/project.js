@@ -31,6 +31,7 @@ const projectSchema = new Schema(
     manager: {
       type: String,
     },
+    methodology: { type: String },
     size: {
       type: Number,
     },

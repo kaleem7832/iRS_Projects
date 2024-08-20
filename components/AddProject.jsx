@@ -26,6 +26,7 @@ export default function AddNew() {
   const [launch, setLaunch] = useState("");
   const [size, setSize] = useState(0);
   const [delivery, setDelivery] = useState("");
+  const [methodology, setMethodology] = useState("");
   const [error, setError] = useState("");
 
   const router = useRouter();
@@ -89,6 +90,7 @@ export default function AddNew() {
           launch,
           delivery,
           size,
+          methodology,
           confirmit,
           status,
         }),
@@ -98,7 +100,7 @@ export default function AddNew() {
         const form = e.target;
         form.reset();
         setError("");
-        router.push("/");
+        router.push("/dashboard");
       } else {
         console.log("Adding project failed.");
       }
@@ -112,13 +114,6 @@ export default function AddNew() {
       <form onSubmit={handleSubmit} className="">
         <div className="flex  gap-3 mx-auto mt-5 justify-center">
           <div>
-            <div className="flex flex-col gap-1 mb-2">
-              <label>Recieved date</label>
-              <input
-                onChange={(e) => setReceived(formated(e.target.value))}
-                type="date"
-              />
-            </div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Client</label>
               <select onChange={(e) => setClient(e.target.value)}>
@@ -136,6 +131,15 @@ export default function AddNew() {
               <label>Project title</label>
               <input onChange={(e) => setTitle(e.target.value)} type="text" />
             </div>
+            <div className="flex flex-col gap-1 mb-2">
+              <label>Methodolofy</label>
+              <select onChange={(e) => setMethodology(e.target.value)}>
+                <option>Please select one</option>
+                <option value="Online">Online</option>
+                <option value="CATI">CATI</option>
+                <option value="Online & CATI">Online & CATI</option>
+              </select>
+            </div>
 
             <div className="flex flex-col gap-1 mb-2">
               <label>ConfirmIT ID</label>
@@ -144,7 +148,13 @@ export default function AddNew() {
                 type="text"
               />
             </div>
-
+            <div className="flex flex-col gap-1 mb-2">
+              <label>Recieved date</label>
+              <input
+                onChange={(e) => setReceived(formated(e.target.value))}
+                type="date"
+              />
+            </div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Primary programmer</label>
               <select onChange={(e) => setProgrammer1(e.target.value)}>
@@ -161,6 +171,9 @@ export default function AddNew() {
                 type="text"
               />
             </div>
+          </div>
+
+          <div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Delivery date</label>
               <input
@@ -168,8 +181,6 @@ export default function AddNew() {
                 type="date"
               />
             </div>
-          </div>
-          <div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Tested by</label>
               <input onChange={(e) => setTester(e.target.value)} type="text" />
@@ -209,15 +220,16 @@ export default function AddNew() {
                 <option value="Live">Live</option>
               </select>
             </div>
-            <div className="flex flex-col gap-1 mb-2">
-              <label>&nbsp;</label>
-              <button
-                type="submit"
-                className="p-2 rounded-sm bg-slate-800 text-white w-full"
-              >
-                Add Project
-              </button>
-            </div>
+          </div>
+        </div>
+        <div className="flex justify-center">
+          <div className="flex flex-col gap-1 mb-2">
+            <button
+              type="submit"
+              className="p-2 rounded-sm bg-slate-800 text-white w-full border border-slate-600"
+            >
+              Add Project
+            </button>
           </div>
         </div>
       </form>

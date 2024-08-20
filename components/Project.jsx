@@ -21,7 +21,7 @@ const Project = ({ project }) => {
       </div>
       <div className="mt-3 flex flex-1 justify-between">
         <div>
-          Online
+          {project.methodology}
           <p className="border-t border-t-slate-600 text-xs text-slate-400">
             Methodology
           </p>

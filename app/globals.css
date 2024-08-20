@@ -3,7 +3,11 @@
 @tailwind utilities;
 
 input, select {
-  @apply w-[400px] border border-gray-200 py-2 px-6 bg-zinc-100/40;
+  @apply w-[400px] border border-gray-200 py-2 px-6 bg-transparent;
+  height: 40px;
+}
+select option{
+  @apply bg-slate-800 text-white;
 }
 body{
   @apply bg-slate-800 text-white
@@ -11,4 +15,6 @@ body{
 label{
  @apply text-xs;
 }
-
+button[type=submit]{
+  @apply w-[400px] border border-gray-200 py-2 px-6;
+}

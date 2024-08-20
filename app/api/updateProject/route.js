@@ -17,6 +17,7 @@ export async function POST(req) {
       delivery,
       size,
       confirmit,
+      methodology,
       status,
     } = await req.json();
     await connectMongoDB();
@@ -36,6 +37,7 @@ export async function POST(req) {
         delivery,
         size,
         status,
+        methodology,
       }
     );
 

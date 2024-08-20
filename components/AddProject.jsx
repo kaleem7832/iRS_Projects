@@ -56,7 +56,10 @@ export default function AddNew() {
       console.log("all fields are required");
       return;
     }
-
+    if (!/^p\d{12}$/.test(confirmit)) {
+      setError("Please provide the valid confirmit id");
+      return;
+    }
     try {
       const resUserExists = await fetch("../api/projectExist", {
         method: "POST",

@@ -100,7 +100,7 @@ export default function AddNew() {
         const form = e.target;
         form.reset();
         setError("");
-        router.push("/dashboard");
+        router.push("/");
       } else {
         console.log("Adding project failed.");
       }

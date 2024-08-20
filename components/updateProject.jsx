@@ -108,7 +108,7 @@ export default function UpdateProject({ projectID }) {
 
         if (res.ok) {
           setError("");
-          router.push("/dashboard");
+          router.push("/");
         } else {
           console.log("Deleting project failed.");
         }

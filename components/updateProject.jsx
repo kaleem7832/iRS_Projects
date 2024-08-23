@@ -229,6 +229,11 @@ export default function UpdateProject({ projectID }) {
                 <option>Please select one</option>
                 <option value="Kaleem">Kaleem</option>
                 <option value="Karishma">Karishma</option>
+                <option value="Ketan">Ketan</option>
+                <option value="Amit">Amit</option>
+                <option value="Janhavi">Janhavi</option>
+                <option value="Bhakti">Bhakti</option>
+                <option value="Priti">Priti</option>
               </select>
             </div>
 

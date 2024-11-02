@@ -35,7 +35,7 @@ export default function LoginForm() {
 
   return (
     <div className="grid place-items-center h-screen">
-      <div className="shadow-lg p-5 rounded-lg border-t-4 border-green-400">
+      <div className="shadow-lg p-5 rounded-lg border border-slate-400">
         <h1 className="text-xl font-bold my-4">Login</h1>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
@@ -59,7 +59,8 @@ export default function LoginForm() {
           )}
 
           <Link className="text-sm mt-3 text-right" href={"/register"}>
-            Don&apos;t have an account? <span className="underline">Register</span>
+            Don&apos;t have an account?{" "}
+            <span className="underline">Register</span>
           </Link>
         </form>
       </div>

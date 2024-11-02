@@ -230,7 +230,6 @@ export default function UpdateProject({ projectID }) {
                 <option value="Kaleem">Kaleem</option>
                 <option value="Karishma">Karishma</option>
                 <option value="Ketan">Ketan</option>
-                <option value="Amit">Amit</option>
                 <option value="Janhavi">Janhavi</option>
                 <option value="Bhakti">Bhakti</option>
                 <option value="Priti">Priti</option>
@@ -247,7 +246,6 @@ export default function UpdateProject({ projectID }) {
                 <option value="Kaleem">Kaleem</option>
                 <option value="Karishma">Karishma</option>
                 <option value="Ketan">Ketan</option>
-                <option value="Amit">Amit</option>
                 <option value="Janhavi">Janhavi</option>
                 <option value="Bhakti">Bhakti</option>
                 <option value="Priti">Priti</option>
@@ -270,10 +268,11 @@ export default function UpdateProject({ projectID }) {
                 value={tester}
               >
                 <option>Please select one</option>
+                <option value="Samiksha">Samiksha</option>
+                <option value="Adil">Adil</option>
                 <option value="Kaleem">Kaleem</option>
                 <option value="Karishma">Karishma</option>
                 <option value="Ketan">Ketan</option>
-                <option value="Amit">Amit</option>
                 <option value="Janhavi">Janhavi</option>
                 <option value="Bhakti">Bhakti</option>
                 <option value="Priti">Priti</option>
@@ -289,7 +288,6 @@ export default function UpdateProject({ projectID }) {
                 <option value="Kaleem">Kaleem</option>
                 <option value="Karishma">Karishma</option>
                 <option value="Ketan">Ketan</option>
-                <option value="Amit">Amit</option>
                 <option value="Janhavi">Janhavi</option>
                 <option value="Bhakti">Bhakti</option>
                 <option value="Priti">Priti</option>

@@ -10,10 +10,7 @@ export default function Header() {
     <div className="bg-slate-950 p-3">
       <div className="container mx-auto  flex justify-between items-center content-center">
         <Link href={"/dashboard"}>
-          <img
-            src="https://www.iresearchservices.com/wp-content/themes/iResearch/img/iresearchLogoLight.svg"
-            width="120px"
-          />
+          <img src="/iRS-Light.svg" width="120px" />
         </Link>
         <nav>
           <Link href={"/dashboard/client"}>

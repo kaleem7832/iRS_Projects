@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
+import Loading from "./MyLoading";
+
 export default function UpdateProject({ projectID }) {
   const [received, setReceived] = useState("");
   const [client, setClient] = useState("");
@@ -20,6 +22,7 @@ export default function UpdateProject({ projectID }) {
   const [delivery, setDelivery] = useState("");
   const [methodology, setMethodology] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const router = useRouter();
 
@@ -50,6 +53,7 @@ export default function UpdateProject({ projectID }) {
   }, []);
 
   useEffect(() => {
+    setLoading(true);
     const fetchProject = async () => {
       try {
         const response = await fetch("../../api/project", {
@@ -64,7 +68,9 @@ export default function UpdateProject({ projectID }) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-
+        if (data) {
+          setLoading(false);
+        }
         setReceived(formated(data.received));
         setTitle(data.title);
         setConfirmit(data.confirmit);
@@ -161,6 +167,7 @@ export default function UpdateProject({ projectID }) {
     }
   };
 
+  if (loading) return <Loading />;
   return (
     <div>
       <form onSubmit={handleSubmit} className="">

@@ -3,9 +3,13 @@
 import { useEffect, useState } from "react";
 import Project from "./Project";
 
+import Loading from "./MyLoading";
+
 export default function Projects() {
   const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
+    setLoading(true);
     const fetchProjects = async () => {
       try {
         const response = await fetch("api/projects", { cache: "no-store" });
@@ -14,6 +18,7 @@ export default function Projects() {
         }
         const data = await response.json();
         setProjects(data);
+        setLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -21,6 +26,8 @@ export default function Projects() {
 
     fetchProjects();
   }, []);
+
+  if (loading) return <Loading />;
 
   return (
     <div className=" container mx-auto mt-5">

@@ -53,7 +53,7 @@ export default function AddClient() {
   };
 
   return (
-    <div>
+    <div className="loading flex justify-center items-center">
       <form onSubmit={handleSubmit} className="">
         <div className="flex  gap-3 mx-auto mt-5 justify-center">
           <div>

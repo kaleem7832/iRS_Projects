@@ -3,8 +3,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-import Loading from "./MyLoading";
-
 export default function UpdateProject({ projectID }) {
   const [received, setReceived] = useState("");
   const [client, setClient] = useState("");
@@ -167,7 +165,12 @@ export default function UpdateProject({ projectID }) {
     }
   };
 
-  if (loading) return <Loading />;
+  if (loading)
+    return (
+      <div className="text-center">
+        <span className="loading loading-bars loading-lg"></span>
+      </div>
+    );
   return (
     <div>
       <form onSubmit={handleSubmit} className="">

@@ -3,8 +3,6 @@
 import { useEffect, useState } from "react";
 import Project from "./Project";
 
-import Loading from "./MyLoading";
-
 export default function Projects() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -27,7 +25,12 @@ export default function Projects() {
     fetchProjects();
   }, []);
 
-  if (loading) return <Loading />;
+  if (loading)
+    return (
+      <div className="text-center">
+        <span className="loading loading-bars loading-lg"></span>
+      </div>
+    );
 
   return (
     <div className=" container mx-auto mt-5">

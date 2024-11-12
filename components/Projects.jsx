@@ -41,7 +41,7 @@ export default function Projects({ query, currentPage }) {
 
   return (
     <div className=" container mx-auto mt-5">
-      <Search />
+      <Search placeholder={"Search by Client"} />
       <div className="overflow-x-auto">
         <table className="table ">
           <thead className="text-white text-sm bg-slate-900">

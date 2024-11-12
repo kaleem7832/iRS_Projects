@@ -17,7 +17,7 @@ export default function Header() {
         </Link>
         <nav>
           <Link href={"/dashboard/"}>
-            <button className="text-white px-3 rounded mr-1">Dashboard</button>
+            <button className="text-white px-3 rounded mr-1">Home</button>
           </Link>
           <Link href={"/dashboard/team"}>
             <button className="text-white px-3 rounded mr-1">Team</button>

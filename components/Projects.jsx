@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Pagination from "./Pagination";
 
 import ProjectTr from "./ProjectTr";
-import Search from "./Search";
 
 export default function Projects({ query, currentPage }) {
   const [projects, setProjects] = useState([]);
@@ -41,7 +40,6 @@ export default function Projects({ query, currentPage }) {
 
   return (
     <div className=" container mx-auto mt-5">
-      <Search placeholder={"Search by Client"} />
       <div className="overflow-x-auto">
         <table className="table ">
           <thead className="text-white text-sm bg-slate-900">

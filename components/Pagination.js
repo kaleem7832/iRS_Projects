@@ -7,6 +7,7 @@ const Pagination = ({ totalPages, page }) => {
   const pageC = page ?? 1;
 
   const [currentPage, setCurrentPage] = useState(pageC);
+
   const router = useRouter();
 
   const handlePageChange = (page) => {

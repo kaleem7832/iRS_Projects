@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Pagination from "./Pagination";
-
 import ProjectTr from "./ProjectTr";
 
 export default function Projects({ query, currentPage }) {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [totalPages, setTotal] = useState(0);
   useEffect(() => {
     setLoading(true);
     const fetchProjects = async () => {
@@ -21,7 +21,10 @@ export default function Projects({ query, currentPage }) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        setProjects(data);
+
+        setProjects(data.filterProjects);
+        setTotal(data.totalPages);
+
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -61,6 +64,9 @@ export default function Projects({ query, currentPage }) {
             })}
           </tbody>
         </table>
+        <div className="flex justify-end mt-2">
+          <Pagination totalPages={totalPages} page={currentPage} />
+        </div>
       </div>
     </div>
   );

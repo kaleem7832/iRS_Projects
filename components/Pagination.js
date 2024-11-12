@@ -3,8 +3,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const Pagination = ({ totalPages }) => {
-  const [currentPage, setCurrentPage] = useState(1);
+const Pagination = ({ totalPages, page }) => {
+  const pageC = page ?? 1;
+
+  const [currentPage, setCurrentPage] = useState(pageC);
   const router = useRouter();
 
   const handlePageChange = (page) => {

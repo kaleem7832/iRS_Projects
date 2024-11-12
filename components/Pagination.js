@@ -17,7 +17,7 @@ const Pagination = ({ totalPages }) => {
       <button
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="join-item"
+        className="join-item btn"
       >
         Previous
       </button>

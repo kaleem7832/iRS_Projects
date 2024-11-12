@@ -14,7 +14,9 @@ export default async function Dashboard(props) {
       <Suspense key={query + currentPage} fallback={<p>Loading...</p>}>
         <Projects query={query} currentPage={currentPage} />
       </Suspense>
-      <Pagination totalPages={5} />
+      <div className="flex justify-end mt-2">
+        <Pagination totalPages={5} />
+      </div>
     </>
   );
 }

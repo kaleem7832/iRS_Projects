@@ -1,6 +1,7 @@
 import Projects from "@/components/Projects";
 import { Suspense } from "react";
 import Search from "@/components/Search";
+import Pagination from "@/components/Pagination";
 
 export default async function Dashboard(props) {
   const searchParams = await props.searchParams;
@@ -13,6 +14,7 @@ export default async function Dashboard(props) {
       <Suspense key={query + currentPage} fallback={<p>Loading...</p>}>
         <Projects query={query} currentPage={currentPage} />
       </Suspense>
+      <Pagination totalPages={5} />
     </>
   );
 }

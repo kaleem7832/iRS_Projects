@@ -53,7 +53,6 @@ export default function Projects({ query, currentPage }) {
               <td>Methodology</td>
               <td>Programmer</td>
               <td>Status</td>
-              <td></td>
             </tr>
           </thead>
           <tbody>

@@ -28,6 +28,8 @@ export default function AddNew() {
   const [delivery, setDelivery] = useState("");
   const [methodology, setMethodology] = useState("");
   const [error, setError] = useState("");
+  const [ok, setOk] = useState(false);
+  const [msg, setMsg] = useState("");
 
   const router = useRouter();
 
@@ -39,7 +41,7 @@ export default function AddNew() {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        console.log(data);
+
         setClients(data);
       } catch (error) {
         console.log(error);
@@ -57,7 +59,12 @@ export default function AddNew() {
       return;
     }
     if (!/^p\d{12}$/.test(confirmit)) {
-      setError("Please provide the valid confirmit id");
+      setOk(true);
+      setMsg("Please provide the valid confirmit id");
+      setTimeout(() => {
+        setOk(false);
+        setMsg("");
+      }, 3000);
       return;
     }
     try {
@@ -72,7 +79,12 @@ export default function AddNew() {
       const { user } = await resUserExists.json();
 
       if (user) {
-        setError("Project already exists.");
+        setOk(true);
+        setMsg("ConfirmIT ID already Present, please check.");
+        setTimeout(() => {
+          setOk(false);
+          setMsg("");
+        }, 3000);
         return;
       }
 
@@ -103,7 +115,13 @@ export default function AddNew() {
         const form = e.target;
         form.reset();
         setError("");
-        router.push("/");
+        setOk(true);
+        setMsg("Project added successfully!");
+        setTimeout(() => {
+          setOk(false);
+          setMsg("");
+          router.push("/");
+        }, 3000);
       } else {
         console.log("Adding project failed.");
       }
@@ -114,12 +132,36 @@ export default function AddNew() {
 
   return (
     <div>
+      <div className="toast">
+        <div
+          role="alert"
+          className={ok ? "alert bg-neutral text-white mx-auto" : "hidden"}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 shrink-0 stroke-current"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <span>{msg}</span>
+        </div>
+      </div>
       <form onSubmit={handleSubmit} className="">
         <div className="flex  gap-3 mx-auto mt-5 justify-center">
-          <div>
+          <div className="w-80">
             <div className="flex flex-col gap-1 mb-2">
               <label>Client</label>
-              <select onChange={(e) => setClient(e.target.value)}>
+              <select
+                onChange={(e) => setClient(e.target.value)}
+                className="select select-sm select-bordered w-full max-w-xs"
+              >
                 <option>Please select client</option>
                 {clients.map((c) => {
                   return (
@@ -132,11 +174,18 @@ export default function AddNew() {
             </div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Project title</label>
-              <input onChange={(e) => setTitle(e.target.value)} type="text" />
+              <input
+                onChange={(e) => setTitle(e.target.value)}
+                type="text"
+                className="input input-bordered input-sm w-full max-w-xs"
+              />
             </div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Methodolofy</label>
-              <select onChange={(e) => setMethodology(e.target.value)}>
+              <select
+                onChange={(e) => setMethodology(e.target.value)}
+                className="select select-bordered select-sm w-full max-w-xs"
+              >
                 <option>Please select one</option>
                 <option value="Online">Online</option>
                 <option value="CATI">CATI</option>
@@ -149,6 +198,7 @@ export default function AddNew() {
               <input
                 onChange={(e) => setConfirmit(e.target.value)}
                 type="text"
+                className="input input-bordered input-sm w-full max-w-xs"
               />
             </div>
             <div className="flex flex-col gap-1 mb-2">
@@ -156,11 +206,15 @@ export default function AddNew() {
               <input
                 onChange={(e) => setReceived(formated(e.target.value))}
                 type="date"
+                className="input input-bordered input-sm w-full max-w-xs"
               />
             </div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Primary programmer</label>
-              <select onChange={(e) => setProgrammer1(e.target.value)}>
+              <select
+                onChange={(e) => setProgrammer1(e.target.value)}
+                className="select select-bordered select-sm w-full max-w-xs"
+              >
                 <option>Please select one</option>
                 <option value="Kaleem">Kaleem</option>
                 <option value="Karishma">Karishma</option>
@@ -173,7 +227,10 @@ export default function AddNew() {
 
             <div className="flex flex-col gap-1 mb-2">
               <label>Secondary programmer</label>
-              <select onChange={(e) => setProgrammer2(e.target.value)}>
+              <select
+                onChange={(e) => setProgrammer2(e.target.value)}
+                className="select select-bordered select-sm w-full max-w-xs"
+              >
                 <option>Please select one</option>
                 <option value="Kaleem">Kaleem</option>
                 <option value="Karishma">Karishma</option>
@@ -185,17 +242,21 @@ export default function AddNew() {
             </div>
           </div>
 
-          <div>
+          <div className=" w-80">
             <div className="flex flex-col gap-1 mb-2">
               <label>Delivery date</label>
               <input
                 onChange={(e) => setDelivery(formated(e.target.value))}
                 type="date"
+                className="input input-bordered input-sm w-full max-w-xs"
               />
             </div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Tested by</label>
-              <select onChange={(e) => setTester(e.target.value)}>
+              <select
+                onChange={(e) => setTester(e.target.value)}
+                className="select select-bordered select-sm w-full max-w-xs"
+              >
                 <option>Please select one</option>
                 <option value="Samiksha">Samiksha</option>
                 <option value="Adil">Adil</option>
@@ -209,7 +270,10 @@ export default function AddNew() {
             </div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Script QC</label>
-              <select onChange={(e) => setScriptqc(e.target.value)}>
+              <select
+                onChange={(e) => setScriptqc(e.target.value)}
+                className="select select-bordered select-sm w-full max-w-xs"
+              >
                 <option>Please select one</option>
                 <option value="Kaleem">Kaleem</option>
                 <option value="Karishma">Karishma</option>
@@ -224,11 +288,16 @@ export default function AddNew() {
               <input
                 onChange={(e) => setLaunch(formated(e.target.value))}
                 type="date"
+                className="input input-bordered input-sm w-full max-w-xs"
               />
             </div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Manager</label>
-              <input onChange={(e) => setManger(e.target.value)} type="text" />
+              <input
+                onChange={(e) => setManger(e.target.value)}
+                type="text"
+                className="input input-bordered input-sm w-full max-w-xs"
+              />
             </div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Sample size</label>
@@ -236,11 +305,15 @@ export default function AddNew() {
                 onChange={(e) => setSize(e.target.value)}
                 type="number"
                 min={0}
+                className="input input-bordered input-sm w-full max-w-xs"
               />
             </div>
             <div className="flex flex-col gap-1 mb-2">
               <label>Status</label>
-              <select onChange={(e) => setStatus(e.target.value)}>
+              <select
+                onChange={(e) => setStatus(e.target.value)}
+                className="select select-bordered select-sm w-full max-w-xs"
+              >
                 <option>Please select one</option>
                 <option value="Programming">Programming</option>
                 <option value="Delivered">Delivered</option>
@@ -251,11 +324,8 @@ export default function AddNew() {
           </div>
         </div>
         <div className="flex justify-center">
-          <div className="flex flex-col gap-1 mb-2">
-            <button
-              type="submit"
-              className="p-2 rounded-sm bg-slate-800 text-white w-full border border-slate-600"
-            >
+          <div className="flex flex-col gap-1 mb-2 mt-5">
+            <button type="submit" className=" btn btn-neutral btn-sm w-80">
               Add Project
             </button>
           </div>

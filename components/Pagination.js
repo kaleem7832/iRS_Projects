@@ -20,7 +20,7 @@ const Pagination = ({ totalPages, page }) => {
       <button
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="join-item btn"
+        className="join-item btn btn-neutral btn-sm"
       >
         Previous
       </button>
@@ -29,7 +29,9 @@ const Pagination = ({ totalPages, page }) => {
           key={page}
           onClick={() => handlePageChange(page)}
           className={
-            currentPage === page ? "join-item btn btn-active" : "join-item btn"
+            currentPage === page
+              ? "join-item btn btn-neutral btn-sm btn-active"
+              : "join-item btn btn-neutral btn-sm"
           }
         >
           {page}
@@ -38,7 +40,7 @@ const Pagination = ({ totalPages, page }) => {
       <button
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="join-item btn"
+        className="join-item btn btn-neutral btn-sm"
       >
         Next
       </button>

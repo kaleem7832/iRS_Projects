@@ -21,6 +21,8 @@ export default function UpdateProject({ projectID }) {
   const [methodology, setMethodology] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+  const [ok, setOk] = useState(false);
+  const [msg, setMsg] = useState("");
 
   const router = useRouter();
 
@@ -40,7 +42,6 @@ export default function UpdateProject({ projectID }) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        console.log(data);
         setClients(data);
       } catch (error) {
         console.log(error);
@@ -93,29 +94,29 @@ export default function UpdateProject({ projectID }) {
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    if (!confirmit) {
-      console.log("all fields are required");
-      return;
-    }
-
+    document.getElementById("my_modal_1").open = false;
     try {
-      if (confirm("Do you want to delete: " + title)) {
-        const res = await fetch("../../api/deleteProject", {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            confirmit,
-          }),
-        });
+      const res = await fetch("../../api/deleteProject", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          confirmit,
+        }),
+      });
 
-        if (res.ok) {
-          setError("");
+      if (res.ok) {
+        setError("");
+        setOk(true);
+        setMsg("Project deleted!");
+        setTimeout(() => {
+          setOk(false);
+          setMsg("");
           router.push("/");
-        } else {
-          console.log("Deleting project failed.");
-        }
+        }, 3000);
+      } else {
+        console.log("Deleting project failed.");
       }
     } catch (error) {
       console.log("Error during deleting: ", error);
@@ -156,7 +157,12 @@ export default function UpdateProject({ projectID }) {
 
       if (res.ok) {
         setError("");
-        router.push("/");
+        setOk(true);
+        setMsg("Project updated!");
+        setTimeout(() => {
+          setOk(false);
+          setMsg("");
+        }, 3000);
       } else {
         console.log("updating project failed.");
       }
@@ -173,15 +179,37 @@ export default function UpdateProject({ projectID }) {
     );
   return (
     <div>
+      <div className="toast">
+        <div
+          role="alert"
+          className={ok ? "alert bg-neutral text-white mx-auto" : "hidden"}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 shrink-0 stroke-current"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <span>{msg}</span>
+        </div>
+      </div>
       <form onSubmit={handleSubmit} className="">
         <div className="flex  gap-3 mx-auto mt-5 justify-center">
-          <div>
+          <div className="w-80">
             <div className="flex flex-col gap-1 mb-2">
               <label>Recieved date</label>
               <input
                 onChange={(e) => setReceived(formated(e.target.value))}
                 type="date"
                 value={received}
+                className="input input-bordered input-sm w-full max-w-xs"
               />
             </div>
             <div className="flex flex-col gap-1 mb-2">
@@ -189,6 +217,7 @@ export default function UpdateProject({ projectID }) {
               <select
                 onChange={(e) => setClient(e.target.value)}
                 value={client}
+                className="select select-sm select-bordered w-full max-w-xs"
               >
                 <option>Please select client</option>
                 {clients.map((c) => {
@@ -206,6 +235,7 @@ export default function UpdateProject({ projectID }) {
                 onChange={(e) => setTitle(e.target.value)}
                 type="text"
                 value={title}
+                className="input input-bordered input-sm w-full max-w-xs"
               />
             </div>
             <div className="flex flex-col gap-1 mb-2">
@@ -213,6 +243,7 @@ export default function UpdateProject({ projectID }) {
               <select
                 onChange={(e) => setMethodology(e.target.value)}
                 value={methodology}
+                className="select select-sm select-bordered w-full max-w-xs"
               >
                 <option>Please select one</option>
                 <option value="Online">Online</option>
@@ -227,6 +258,7 @@ export default function UpdateProject({ projectID }) {
                 type="text"
                 value={confirmit}
                 disabled
+                className="input input-bordered input-sm w-full max-w-xs"
               />
             </div>
 
@@ -235,6 +267,7 @@ export default function UpdateProject({ projectID }) {
               <select
                 onChange={(e) => setProgrammer1(e.target.value)}
                 value={programmer1}
+                className="select select-sm select-bordered w-full max-w-xs"
               >
                 <option>Please select one</option>
                 <option value="Kaleem">Kaleem</option>
@@ -251,6 +284,7 @@ export default function UpdateProject({ projectID }) {
               <select
                 onChange={(e) => setProgrammer2(e.target.value)}
                 value={programmer2}
+                className="select select-sm select-bordered w-full max-w-xs"
               >
                 <option>Please select one</option>
                 <option value="Kaleem">Kaleem</option>
@@ -262,13 +296,14 @@ export default function UpdateProject({ projectID }) {
               </select>
             </div>
           </div>
-          <div>
+          <div className="w-80">
             <div className="flex flex-col gap-1 mb-2">
               <label>Delivery date</label>
               <input
                 onChange={(e) => setDelivery(formated(e.target.value))}
                 type="date"
                 value={delivery}
+                className="input input-bordered input-sm w-full max-w-xs"
               />
             </div>
             <div className="flex flex-col gap-1 mb-2">
@@ -276,6 +311,7 @@ export default function UpdateProject({ projectID }) {
               <select
                 onChange={(e) => setTester(e.target.value)}
                 value={tester}
+                className="select select-sm select-bordered w-full max-w-xs"
               >
                 <option>Please select one</option>
                 <option value="Samiksha">Samiksha</option>
@@ -293,6 +329,7 @@ export default function UpdateProject({ projectID }) {
               <select
                 onChange={(e) => setScriptqc(e.target.value)}
                 value={scriptqc}
+                className="select select-sm select-bordered w-full max-w-xs"
               >
                 <option>Please select one</option>
                 <option value="Kaleem">Kaleem</option>
@@ -309,6 +346,7 @@ export default function UpdateProject({ projectID }) {
                 onChange={(e) => setLaunch(formated(e.target.value))}
                 type="date"
                 value={launch}
+                className="input input-bordered input-sm w-full max-w-xs"
               />
             </div>
             <div className="flex flex-col gap-1 mb-2">
@@ -317,6 +355,7 @@ export default function UpdateProject({ projectID }) {
                 onChange={(e) => setManger(e.target.value)}
                 type="text"
                 value={manager}
+                className="input input-bordered input-sm w-full max-w-xs"
               />
             </div>
             <div className="flex flex-col gap-1 mb-2">
@@ -325,6 +364,7 @@ export default function UpdateProject({ projectID }) {
                 onChange={(e) => setSize(e.target.value)}
                 type="numeric"
                 value={size}
+                className="input input-bordered input-sm w-full max-w-xs"
               />
             </div>
             <div className="flex flex-col gap-1 mb-2">
@@ -332,6 +372,7 @@ export default function UpdateProject({ projectID }) {
               <select
                 onChange={(e) => setStatus(e.target.value)}
                 value={status}
+                className="select select-sm select-bordered w-full max-w-xs"
               >
                 <option>Please select one</option>
                 <option value="Programming">Programming</option>
@@ -346,25 +387,39 @@ export default function UpdateProject({ projectID }) {
           <div className="flex flex-col gap-1 mb-2">
             <label>&nbsp;</label>
             <button
-              onClick={handleDelete}
+              // onClick={handleDelete}
+              onClick={() => document.getElementById("my_modal_1").showModal()}
               type="button"
-              className="w-[400px] p-2 rounded-sm bg-slate-800 text-red-600  border border-red-600"
+              className="btn btn-neutral btn-sm w-80"
             >
               Delete Project
             </button>
           </div>
           <div className="flex flex-col gap-1 mb-2">
             <label>&nbsp;</label>
-            <button
-              type="submit"
-              className="p-2 rounded-sm bg-slate-800 text-white w-full border border-slate-600"
-            >
+            <button type="submit" className="btn btn-neutral btn-sm w-80">
               Update Project
             </button>
           </div>
         </div>
       </form>
       {error}
+
+      <dialog id="my_modal_1" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-md">Delete</h3>
+          <p className="py-4">Do you want to delete {title}?</p>
+          <div className="modal-action">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn btn-sm btn-neutral mr-1">Cancel</button>
+              <button className="btn btn-sm btn-neutral" onClick={handleDelete}>
+                Delete
+              </button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </div>
   );
 }

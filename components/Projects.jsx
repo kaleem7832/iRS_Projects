@@ -45,7 +45,7 @@ export default function Projects({ query, currentPage }) {
     <div className=" container mx-auto mt-5">
       <div className="overflow-x-auto">
         <table className="table ">
-          <thead className="text-white text-sm bg-slate-900">
+          <thead>
             <tr>
               <td>Date</td>
               <td>Client</td>

@@ -1,17 +1,18 @@
 import Header from "@/components/header";
+import NewHeader from "@/components/HeaderNew";
 
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "SP Projects Manager",
+  title: "SP Projects",
   description: "Projects management by iResearch Services",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="cyberpunk">
       <body>
-        <Header />
+        <NewHeader />
         <div className="container mx-auto min-h-full">{children}</div>
         <Footer />
       </body>

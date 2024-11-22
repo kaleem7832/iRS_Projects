@@ -19,7 +19,7 @@ const ProjectTr = ({ project }) => {
       <td>
         <Link
           href={"/dashboard/project/" + project.confirmit}
-          className="border border-slate-400 px-3 py-1 rounded-lg inline-block bg-slate-800 text-white hover:bg-slate-900"
+          className="btn btn-sm btn-neutral"
         >
           Open
         </Link>

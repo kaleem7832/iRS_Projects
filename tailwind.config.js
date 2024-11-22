@@ -5,6 +5,17 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  daisyui: {
+    themes: [
+      "light",
+      "dark",
+      "cupcake",
+      "retro",
+      "cyberpunk",
+      "valentine",
+      "aqua",
+    ],
+  },
   theme: {
     extend: {
       backgroundImage: {

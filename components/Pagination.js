@@ -1,18 +1,24 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 const Pagination = ({ totalPages, page }) => {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
+  const params = new URLSearchParams(searchParams);
+
   const pageC = page ?? 1;
 
   const [currentPage, setCurrentPage] = useState(pageC);
 
-  const router = useRouter();
-
   const handlePageChange = (page) => {
+    params.set("page", page);
+
     setCurrentPage(page);
-    router.push(`?page=${page}`, undefined, { shallow: true });
+    replace(`${pathname}?${params.toString()}`);
   };
 
   return (

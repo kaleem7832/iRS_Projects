@@ -12,7 +12,7 @@ export default function Search({ placeholder }) {
     const params = new URLSearchParams(searchParams);
     if (term) {
       params.set("query", term);
-      params.delete("page");
+      //params.delete("page");
     } else {
       params.delete("query");
     }
